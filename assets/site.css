@@ -1,0 +1,47 @@
+/* pillsync.app — same brand rules as the app: blue & white, pill buttons, 8dp grid, min 12px text. */
+:root {
+  --brand-50: #eef4ff;
+  --brand-100: #dce7ff;
+  --brand-500: #3468f0;
+  --brand-600: #2152d6;
+  --brand-700: #1a40a8;
+  --ink: #14213d;
+  --muted: #55627d;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(180deg, var(--brand-50), #fff 60%);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+main { max-width: 480px; margin: 0 auto; padding: 48px 16px 64px; display: flex; flex-direction: column; gap: 24px; }
+.center { text-align: center; align-items: center; }
+.brand { font-weight: 800; font-size: 24px; color: var(--brand-700); }
+.brand span { color: var(--brand-500); }
+h1 { margin: 0; font-size: 32px; line-height: 1.2; font-weight: 800; }
+h2 { margin: 0; font-size: 20px; font-weight: 800; }
+p { margin: 0; font-size: 16px; color: var(--muted); }
+.mascot { width: 128px; height: auto; }
+.card { background: #fff; border: 1px solid var(--brand-100); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 0 24px; border-radius: 999px;
+  font-weight: 800; font-size: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font-family: inherit; }
+.btn-primary { background: var(--brand-600); color: #fff; }
+.btn-light { background: #fff; color: var(--ink); border-color: #d9e1f0; }
+.code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 40px; font-weight: 800; letter-spacing: 8px; color: var(--brand-700);
+  background: var(--brand-50); border-radius: 999px; padding: 16px 24px; text-align: center; }
+.steps { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.steps li { display: flex; gap: 16px; align-items: flex-start; }
+.steps b { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: var(--brand-600); color: #fff; font-size: 14px; }
+.small { font-size: 12px; color: var(--muted); }
+footer { display: flex; justify-content: center; gap: 16px; font-size: 14px; }
+footer a, .link { color: var(--brand-700); font-weight: 700; }
+.legal h2 { margin-top: 8px; }
+.legal p { color: #3a4560; }
+[hidden] { display: none !important; }
+.center > .card { align-self: stretch; }
+.steps, .card { text-align: left; }
+.card > p { text-align: center; }

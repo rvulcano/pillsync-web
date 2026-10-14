@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2152d6">
+<title>PillSync — Terms of Use</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<main>
+  <a class="brand" href="/" style="text-decoration:none">Pill<span>Sync</span></a>
+  <nav class="small" style="display:flex;gap:16px"><a class="link" href="?lang=en">English</a><a class="link" href="?lang=pt-BR">Português</a><a class="link" href="?lang=es">Español</a></nav>
+<article class="legal" lang="en" data-lang="en" hidden>
+  <h1>Terms of Use</h1>
+  <p class="small">Draft v0.1 — October 14, 2026</p>
+  <h2>Not medical advice</h2>
+  <p>PillSync helps you remember medications. It does not give medical advice and does not replace your doctor or pharmacist. Always follow your prescription.</p>
+  <h2>Reminders can fail</h2>
+  <p>Reminders depend on your phone (notifications allowed, battery settings, internet for caregiver alerts). Check the Reminder check-up in Settings. Do not rely on PillSync as the only safeguard for critical medication.</p>
+  <h2>Caring for someone</h2>
+  <p>Connect only with people who agree to it. If you manage someone else’s medications, you confirm you have their consent or the legal right to do so.</p>
+  <h2>Subscriptions</h2>
+  <p>PillSync Pro is billed by the App Store or Google Play. It renews automatically until you cancel in your store settings; the lifetime option is a one-time purchase. Refunds follow the store’s rules.</p>
+  <h2>Your account</h2>
+  <p>Keep your password safe. You can delete your account at any time in Settings. We may suspend accounts used to abuse the service.</p>
+  <h2>Liability</h2>
+  <p>To the extent permitted by law, [legal entity name] is not liable for doses missed or taken incorrectly. These terms are governed by the laws of [jurisdiction].</p>
+  <h2>Contact</h2>
+  <p>[contact e-mail]</p>
+</article>
+<article class="legal" lang="pt-BR" data-lang="pt-BR" hidden>
+  <h1>Termos de Uso</h1>
+  <p class="small">Rascunho v0.1 — 14 de outubro de 2026</p>
+  <h2>Não é orientação médica</h2>
+  <p>O PillSync ajuda você a lembrar dos remédios. Ele não dá orientação médica e não substitui seu médico ou farmacêutico. Siga sempre a sua receita.</p>
+  <h2>Lembretes podem falhar</h2>
+  <p>Os lembretes dependem do seu celular (notificações permitidas, economia de bateria, internet para os alertas de cuidado). Confira a Checagem dos lembretes em Ajustes. Não use o PillSync como única proteção para remédios críticos.</p>
+  <h2>Cuidar de alguém</h2>
+  <p>Conecte-se só com quem concordar. Se você gerencia os remédios de outra pessoa, confirma que tem o consentimento dela ou o direito legal de fazer isso.</p>
+  <h2>Assinaturas</h2>
+  <p>O PillSync Pro é cobrado pela App Store ou pelo Google Play. Renova automaticamente até você cancelar nas configurações da loja; a opção vitalícia é uma compra única. Reembolsos seguem as regras da loja.</p>
+  <h2>Sua conta</h2>
+  <p>Guarde sua senha com segurança. Você pode excluir a conta a qualquer momento em Ajustes. Podemos suspender contas usadas para abusar do serviço.</p>
+  <h2>Responsabilidade</h2>
+  <p>Na medida permitida pela lei, [legal entity name] não se responsabiliza por doses esquecidas ou tomadas de forma incorreta. Estes termos seguem as leis de [foro].</p>
+  <h2>Contato</h2>
+  <p>[contact e-mail]</p>
+</article>
+<article class="legal" lang="es" data-lang="es" hidden>
+  <h1>Términos de Uso</h1>
+  <p class="small">Borrador v0.1 — 14 de octubre de 2026</p>
+  <h2>No es consejo médico</h2>
+  <p>PillSync te ayuda a recordar tus medicinas. No da consejo médico ni reemplaza a tu médico o farmacéutico. Sigue siempre tu receta.</p>
+  <h2>Los recordatorios pueden fallar</h2>
+  <p>Los recordatorios dependen de tu teléfono (notificaciones permitidas, ahorro de batería, internet para las alertas de cuidado). Revisa la Revisión de recordatorios en Ajustes. No uses PillSync como única protección para medicinas críticas.</p>
+  <h2>Cuidar a alguien</h2>
+  <p>Conéctate solo con quien esté de acuerdo. Si gestionas las medicinas de otra persona, confirmas que tienes su consentimiento o el derecho legal de hacerlo.</p>
+  <h2>Suscripciones</h2>
+  <p>PillSync Pro se cobra a través de App Store o Google Play. Se renueva automáticamente hasta que la canceles en la tienda; la opción de por vida es un pago único. Los reembolsos siguen las reglas de la tienda.</p>
+  <h2>Tu cuenta</h2>
+  <p>Guarda tu contraseña de forma segura. Puedes eliminar tu cuenta en cualquier momento en Ajustes. Podemos suspender cuentas usadas para abusar del servicio.</p>
+  <h2>Responsabilidad</h2>
+  <p>En la medida permitida por la ley, [legal entity name] no se hace responsable de dosis olvidadas o tomadas incorrectamente. Estos términos se rigen por las leyes de [jurisdicción].</p>
+  <h2>Contacto</h2>
+  <p>[contact e-mail]</p>
+</article>
+  <footer><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></footer>
+</main>
+<script>
+  var q = new URLSearchParams(location.search).get('lang')
+  var nav = (navigator.language || 'en').toLowerCase()
+  var lang = q || (nav.indexOf('pt') === 0 ? 'pt-BR' : nav.indexOf('es') === 0 ? 'es' : 'en')
+  var el = document.querySelector('[data-lang="' + lang + '"]') || document.querySelector('[data-lang="en"]')
+  el.hidden = false
+  document.documentElement.lang = el.getAttribute('lang')
+</script>
+</body>
+</html>

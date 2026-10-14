@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2152d6">
+<meta name="robots" content="noindex">
+<title>PillSync — invite</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- Shared previews (WhatsApp, iMessage) -->
+<meta property="og:title" content="PillSync">
+<meta property="og:description" content="You were invited to PillSync — medication reminders with family care.">
+<meta property="og:image" content="https://pillsync.app/assets/mascot-love.png">
+</head>
+<body>
+<main class="center">
+  <div class="brand">Pill<span>Sync</span></div>
+  <img class="mascot" src="/assets/mascot-love.png" alt="" width="128" height="128">
+  <h1 id="title"></h1>
+  <p id="sub"></p>
+
+  <div class="card" id="steps-card">
+    <ol class="steps">
+      <li><b>1</b><div><h2 id="s1"></h2></div></li>
+      <li><b>2</b><div><h2 id="s2"></h2><p id="s2auto"></p></div></li>
+    </ol>
+    <a class="btn btn-primary" id="open"></a>
+    <a class="btn btn-light" id="play" hidden></a>
+    <a class="btn btn-light" id="appstore" hidden></a>
+  </div>
+
+  <div class="card" id="code-card">
+    <p id="s2code"></p>
+    <div class="code" id="code"></div>
+    <button class="btn btn-light" id="copy" type="button"></button>
+  </div>
+
+  <div class="card" id="invalid" hidden><p id="invalid-text"></p></div>
+
+  <footer><a href="/privacy/" data-t="privacy">Privacy Policy</a><a href="/terms/" data-t="terms">Terms of Use</a></footer>
+</main>
+<script type="module">
+  import { T } from '/assets/i18n.js'
+
+  // Public, read-only config (the publishable key is meant to ship to browsers).
+  const SUPABASE_URL = 'https://kzxzphcxtrokwdtgqgmp.supabase.co'
+  const SUPABASE_KEY = 'sb_publishable_dmnUiM6zBqxRIHqTb5LVMQ_qa_3hEt1'
+  const PACKAGE = 'com.pillsync.app'
+  const APP_STORE_URL = null // set once the iOS app is live, e.g. 'https://apps.apple.com/app/id0000000000'
+
+  const $ = (id) => document.getElementById(id)
+  document.querySelectorAll('[data-t]').forEach((el) => { const v = T[el.dataset.t]; if (typeof v === 'string') el.textContent = v })
+
+  const code = (new URLSearchParams(location.search).get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6)
+  const isAndroid = /android/i.test(navigator.userAgent)
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent)
+  const playUrl = `https://play.google.com/store/apps/details?id=${PACKAGE}&referrer=${encodeURIComponent('invite=' + code)}`
+
+  $('title').textContent = T.inviteTitle('')
+  $('sub').textContent = T.inviteSub
+  $('s1').textContent = T.step1
+  $('s2').textContent = T.step2
+  $('s2auto').textContent = isAndroid ? T.step2auto : ''
+  $('s2code').textContent = T.step2code
+  $('code').textContent = code
+  $('copy').textContent = T.copy
+
+  // "Open in the app": opens PillSync if installed; on Android falls back to the Play Store with the code attached.
+  const open = $('open')
+  open.textContent = T.open
+  open.href = isAndroid
+    ? `intent://invite/${code}#Intent;scheme=pillsync;package=${PACKAGE};S.browser_fallback_url=${encodeURIComponent(playUrl)};end`
+    : `pillsync://invite/${code}`
+
+  if (!isIOS) { $('play').hidden = false; $('play').href = playUrl; $('play').textContent = T.play }
+  if (!isAndroid && APP_STORE_URL) { $('appstore').hidden = false; $('appstore').href = APP_STORE_URL; $('appstore').textContent = T.appstore }
+
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(code); $('copy').textContent = T.copied } catch {}
+  })
+
+  async function preview() {
+    if (code.length !== 6) return showInvalid()
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/invite_preview`, {
+        method: 'POST',
+        headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_code: code }),
+      })
+      const [row] = await res.json()
+      if (!row || !row.valid) return showInvalid()
+      $('title').textContent = T.inviteTitle(row.caregiver_first_name)
+    } catch { /* offline: keep the generic title */ }
+  }
+  function showInvalid() {
+    $('steps-card').hidden = true
+    $('code-card').hidden = true
+    $('invalid').hidden = false
+    $('invalid-text').textContent = T.invalid
+  }
+  preview()
+</script>
+</body>
+</html>

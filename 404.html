@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PillSync</title>
+<script>
+  // Short invite links: pillsync.app/i/ABC123 → /invite/?c=ABC123 (GitHub Pages serves this file for unknown paths).
+  // On a phone with the app installed, Android App Links / iOS Universal Links open the app before this page loads.
+  var m = location.pathname.match(/^\/i\/([A-Za-z0-9]{6})\/?$/)
+  location.replace(m ? '/invite/?c=' + m[1].toUpperCase() : '/')
+</script>
+</head>
+<body></body>
+</html>
