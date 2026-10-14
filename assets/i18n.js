@@ -1,7 +1,15 @@
 // Tiny i18n for the static site: en (default), pt-BR, es — picked from the browser language.
+// ?lang=pt|es|en wins (and is remembered), then the last choice, then the browser.
 const lang = (() => {
-  const l = (navigator.language || 'en').toLowerCase()
-  return l.startsWith('pt') ? 'pt' : l.startsWith('es') ? 'es' : 'en'
+  const norm = (l) => (l || '').toLowerCase().replace(/-.*/, '')
+  const pick = (l) => (['pt', 'es', 'en'].includes(norm(l)) ? norm(l) : null)
+  const q = pick(new URLSearchParams(location.search).get('lang'))
+  try {
+    if (q) localStorage.setItem('pillsync.site.lang', q)
+    return q || pick(localStorage.getItem('pillsync.site.lang')) || pick(navigator.language) || 'en'
+  } catch {
+    return q || pick(navigator.language) || 'en'
+  }
 })()
 document.documentElement.lang = { pt: 'pt-BR', es: 'es', en: 'en' }[lang]
 
