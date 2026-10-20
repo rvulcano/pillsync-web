@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pillsync.app",
+      "sha256_cert_fingerprints": [
+        "E5:4B:C5:3A:05:0A:8C:98:39:52:41:D9:65:CC:48:0F:ED:C7:78:E4:C1:B3:51:61:C1:3C:02:42:43:6F:D8:76"
+      ]
+    }
+  }
+]
